@@ -1,0 +1,49 @@
+type MerkleDrop @entity {
+  # Address
+  id: ID!
+
+  dao: Bytes!
+
+  merkleRoot: Bytes!
+
+  aura: Bytes!
+
+  auraLocker: Bytes!
+
+  deployTime: Int!
+
+  startTime: Int!
+
+  expiryTime: Int!
+}
+
+type Account @entity {
+  # Address
+  id: ID!
+
+  hasClaimed: Boolean!
+
+  totalRewardPaid: BigInt!
+
+  poolAccounts: [PoolAccount!]! @derivedFrom(field: "account")
+}
+
+type PoolAccount @entity {
+  # {pool.id}.{account.id}
+  id: ID!
+
+  pool: Pool!
+
+  account: Account!
+
+  rewardPaid: BigInt!
+}
+
+type Pool @entity(immutable: true) {
+  # rewardPool
+  id: ID!
+
+  pid: String!
+
+  poolAccounts: [PoolAccount!]! @derivedFrom(field: "pool")
+}

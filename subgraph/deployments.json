@@ -1,0 +1,28 @@
+{
+  "prod": {
+    "network": "mainnet",
+    "AuraMerkleDropV2": {
+      "address": "0x7818A1DA7BD1E64c199029E86Ba244a9798eEE10",
+      "startBlock": 16170000
+    },
+    "BoosterV1": {
+      "address": "0x7818A1DA7BD1E64c199029E86Ba244a9798eEE10",
+      "startBlock": 16170000
+    },
+    "AuraBalRewardPool": {
+      "address": "0x5e5ea2048475854a5702f5b8468a51ba1296efcc",
+      "startBlock": 16170000
+    }
+  },
+  "local": {
+    "network": "mainnet",
+    "AuraMerkleDropV2": {
+      "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      "startBlock": 0
+    },
+    "BoosterV1": {
+      "address": "0x7818A1DA7BD1E64c199029E86Ba244a9798eEE10",
+      "startBlock": 0
+    }
+  }
+}

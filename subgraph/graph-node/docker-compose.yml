@@ -1,0 +1,58 @@
+version: "3"
+services:
+  graph-node:
+    image: graphprotocol/graph-node:latest
+    ports:
+      - "9000:8000"
+      - "9001:8001"
+      - "9020:8020"
+      - "9030:8030"
+      - "9040:8040"
+    depends_on:
+      - ipfs
+      - postgres
+    environment:
+      postgres_host: postgres
+      postgres_user: graph-node
+      postgres_pass: let-me-in
+      postgres_db: graph-node
+      ipfs: "ipfs:5001"
+      ethereum: "mainnet:http://host.docker.internal:8545"
+      GRAPH_LOG: debug
+      ETHEREUM_POLLING_INTERVAL: 10000
+      GRAPH_ETHEREUM_TARGET_TRIGGERS_PER_BLOCK_RANGE: 50
+      ETHEREUM_TRACE_STREAM_STEP_SIZE: 25
+      ETHEREUM_BLOCK_BATCH_SIZE: 10
+      GRAPH_ETHEREUM_MAX_BLOCK_RANGE_SIZE: 250
+      GRAPH_ETHEREUM_MAX_EVENT_ONLY_RANGE: 125
+      GRAPH_ETHEREUM_REQUEST_RETRIES: 30
+      GRAPH_ETHEREUM_BLOCK_INGESTOR_MAX_CONCURRENT_JSON_RPC_CALLS_FOR_TXN_RECEIPTS: 2
+      GRAPH_ETHEREUM_FETCH_TXN_RECEIPTS_IN_BATCHES: "true"
+
+  postgres:
+    image: postgres
+    ports:
+      - '5432:5432'
+    command:
+      [
+        "postgres",
+        "-cshared_preload_libraries=pg_stat_statements"
+      ]
+    environment:
+      POSTGRES_USER: graph-node
+      POSTGRES_PASSWORD: let-me-in
+      POSTGRES_DB: graph-node
+      # FIXME: remove this env. var. which we shouldn't need. Introduced by
+      # <https://github.com/graphprotocol/graph-node/pull/3511>, maybe as a
+      # workaround for https://github.com/docker/for-mac/issues/6270?
+      PGDATA: "/var/lib/postgresql/data"
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=C"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+
+  ipfs:
+    image: ipfs/go-ipfs:v0.4.23
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./data/ipfs:/data/ipfs

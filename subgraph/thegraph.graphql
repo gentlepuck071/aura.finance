@@ -1,0 +1,6 @@
+directive @entity(immutable: Boolean) repeatable on OBJECT
+directive @derivedFrom(field: String!) on FIELD_DEFINITION
+
+scalar BigInt
+scalar BigDecimal
+scalar Bytes

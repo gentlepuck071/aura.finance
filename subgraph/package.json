@@ -1,0 +1,35 @@
+{
+  "name": "aura-upgrade-rewards-drop-subgraph",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "codegen": "pnpm exec graph codegen",
+    "codegen:prod": "node ./prepare.js prod && pnpm codegen",
+    "create:prod": "graph create --node http://3.121.126.34:8020 aura/upgrade-rewards-merkle-drop",
+    "deploy:prod": "graph deploy --node http://3.121.126.34:8020 --ipfs http://3.121.126.34:5001 aura/upgrade-rewards-merkle-drop",
+    "remove:prod": "graph remove --node http://3.121.126.34:8020 aura/upgrade-rewards-merkle-drop",
+    "codegen:local": "node ./prepare.js local && pnpm codegen",
+    "create:local": "graph create --node http://localhost:9020/ aura/upgrade-rewards-merkle-drop",
+    "deploy:local": "graph deploy --node http://localhost:9020/ --ipfs http://localhost:5001 aura/upgrade-rewards-merkle-drop",
+    "remove:local": "graph remove --node http://localhost:9020/ aura/upgrade-rewards-merkle-drop"
+  },
+  "keywords": [],
+  "author": "0xButterfield",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.17",
+    "mustache": "^4.2.0",
+    "prettier": "^2.8.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "^0.33.0",
+    "@graphprotocol/graph-ts": "^0.27.0"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
+}

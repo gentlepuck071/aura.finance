@@ -1,0 +1,33 @@
+{
+  "name": "aura-upgrade-rewards-drop-rewards",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "epoch": "node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm src/index.ts",
+    "epoch:local": "pnpm epoch --startBlock 16177665 --endBlock 16233052 --remap remap.json --outputDir drop-1 --verbose"
+  },
+  "keywords": [],
+  "author": "0xButterfield",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.17",
+    "prettier": "^2.8.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.3"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "dependencies": {
+    "command-line-args": "^5.2.1",
+    "ethers": "^5.7.2",
+    "froebel": "^0.23.0",
+    "graphql": "^16.6.0",
+    "graphql-request": "^5.1.0",
+    "merkletreejs": "^0.3.9",
+    "p-limit": "^4.0.0"
+  }
+}

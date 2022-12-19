@@ -1,0 +1,113 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: AuraMerkleDropV2
+    network: '{{network}}'
+    source:
+      address: '{{AuraMerkleDropV2.address}}'
+      abi: AuraMerkleDropV2
+      startBlock: {{AuraMerkleDropV2.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - DaoSet
+        - RootSet
+        - StartedEarly
+        - LockerSet
+        - Claimed
+      abis:
+        - name: AuraMerkleDropV2
+          file: ./abis/AuraMerkleDropV2.json
+        - name: BoosterV1
+          file: ./abis/BoosterV1.json
+        - name: BaseRewardPool
+          file: ./abis/BaseRewardPool.json
+      eventHandlers:
+        - event: DaoSet(address)
+          handler: handleDaoSet
+        - event: RootSet(bytes32)
+          handler: handleRootSet
+        - event: StartedEarly()
+          handler: handleStartedEarly
+        - event: LockerSet(address)
+          handler: handleLockerSet
+        - event: Claimed(address,uint256,bool)
+          handler: handleClaimed
+        - event: Initialized()
+          handler: handleInitialized
+      file: ./src/AuraMerkleDropV2.ts
+
+  - kind: ethereum
+    name: BoosterV1
+    network: '{{network}}'
+    source:
+      address: '{{BoosterV1.address}}'
+      abi: BoosterV1
+      startBlock: {{BoosterV1.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Pool
+        - PoolShutdown
+      abis:
+        - name: BoosterV1
+          file: ./abis/BoosterV1.json
+        - name: BaseRewardPool
+          file: ./abis/BaseRewardPool.json
+      eventHandlers:
+        - event: PoolShutdown(uint256)
+          handler: handlePoolShutdown
+      file: ./src/BoosterV1.ts
+
+  - kind: ethereum
+    name: AuraBalRewardPool
+    network: '{{network}}'
+    source:
+      address: '{{AuraBalRewardPool.address}}'
+      abi: BaseRewardPool
+      startBlock: {{AuraBalRewardPool.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Pool
+        - RewardPaid
+      abis:
+        - name: BoosterV1
+          file: ./abis/BoosterV1.json
+        - name: BaseRewardPool
+          file: ./abis/BaseRewardPool.json
+      eventHandlers:
+        - event: RewardPaid(indexed address,uint256)
+          handler: handleRewardPaid
+      file: ./src/AuraBalRewardPool.ts
+
+templates:
+  - kind: ethereum
+    name: BaseRewardPool
+    network: '{{network}}'
+    source:
+      abi: BaseRewardPool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Pool
+        - RewardPaid
+      abis:
+        - name: BoosterV1
+          file: ./abis/BoosterV1.json
+        - name: BaseRewardPool
+          file: ./abis/BaseRewardPool.json
+      eventHandlers:
+        - event: RewardPaid(indexed address,uint256)
+          handler: handleRewardPaid
+      file: ./src/BaseRewardPool.ts

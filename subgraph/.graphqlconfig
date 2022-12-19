@@ -1,0 +1,14 @@
+{
+  "name": "Schema",
+  "extensions": {
+    "endpoints": {
+      "Production": {
+        "url": "https://graph.aura.finance/subgraphs/name/aura/upgrade-rewards-merkle-drop",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}
