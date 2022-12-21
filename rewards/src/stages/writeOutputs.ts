@@ -93,14 +93,18 @@ export async function writeOutputs(pipeline: Pipeline) {
   {
     logger('Writing claims...')
 
-    const claimsMapped = Object.fromEntries(
-      Object.entries(merkleDrop.claims)
-        .sort(([, a], [, b]) => (a.lt(b) ? 1 : -1))
-        .map(([account, amount]) => [account, formatUnits(amount)]),
-    )
+    const claimsWithRoot = {
+      claims: Object.fromEntries(
+        Object.entries(merkleDrop.claims)
+          .sort(([, a], [, b]) => (a.lt(b) ? 1 : -1))
+          .map(([account, amount]) => [account, formatUnits(amount)]),
+      ),
+      root: merkleDrop.root,
+    }
+
     await fs.promises.writeFile(
       path.join(outputDir, 'claims.json'),
-      JSON.stringify(claimsMapped, null, 2),
+      JSON.stringify(claimsWithRoot, null, 2),
       'utf-8',
     )
   }

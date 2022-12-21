@@ -34,7 +34,7 @@ pnpm install
 #### Generating a rewards epoch
 
 ```bash
-pnpm epoch --startBlock 16177665 --endBlock 16233052 --remap remap.json --outputDir drop
+pnpm epoch --startBlock 16177665 --endBlock 16239455 --remap remap.json --outputDir drop
 ```
 
 ### Script arguments
