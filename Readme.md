@@ -2,6 +2,8 @@
 
 Merkle drop for AURA rewards distributed after the Dec 2022 upgrade.
 
+The Merkle drop contract is deployed [here](https://etherscan.io/address/0x69a07d8a45b71e5224bb220ae8933ae8dce96b74)
+
 ## About
 
 This repository contains a script for calculating rewards, and a subgraph
