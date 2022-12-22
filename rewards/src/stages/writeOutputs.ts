@@ -101,10 +101,23 @@ export async function writeOutputs(pipeline: Pipeline) {
       ),
       root: merkleDrop.root,
     }
+    const claimsWithRootExact = {
+      claims: Object.fromEntries(
+        Object.entries(merkleDrop.claims)
+          .sort(([, a], [, b]) => (a.lt(b) ? 1 : -1))
+          .map(([account, amount]) => [account, amount.toString()]),
+      ),
+      root: merkleDrop.root,
+    }
 
     await fs.promises.writeFile(
       path.join(outputDir, 'claims.json'),
       JSON.stringify(claimsWithRoot, null, 2),
+      'utf-8',
+    )
+    await fs.promises.writeFile(
+      path.join(outputDir, 'claimsExact.json'),
+      JSON.stringify(claimsWithRootExact, null, 2),
       'utf-8',
     )
   }
