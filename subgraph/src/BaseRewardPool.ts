@@ -1,5 +1,7 @@
-import { dataSource } from '@graphprotocol/graph-ts'
-import { RewardPaid } from '../generated/templates/BaseRewardPool/BaseRewardPool'
+import {
+  RewardPaid,
+  BaseRewardPool,
+} from '../generated/templates/BaseRewardPool/BaseRewardPool'
 import { getAccount } from './getAccount'
 import { getPool } from './getPool'
 import { getPoolAccount } from './getPoolAccount'
@@ -9,8 +11,8 @@ export function handleRewardPaid(event: RewardPaid): void {
   account.totalRewardPaid = account.totalRewardPaid.plus(event.params.reward)
   account.save()
 
-  let context = dataSource.context()
-  let pid = context.getString('pid')
+  let contract = BaseRewardPool.bind(event.address)
+  let pid = contract.pid().toString()
 
   let pool = getPool(event.address, pid)
 

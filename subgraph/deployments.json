@@ -12,7 +12,89 @@
     "AuraBalRewardPool": {
       "address": "0x5e5ea2048475854a5702f5b8468a51ba1296efcc",
       "startBlock": 16170000
-    }
+    },
+    "shutdownPools": [
+      {
+        "address": "0xae327c28d13a497357ad2189b75c83e6ba8cadc6",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0xcea3aa5b2a50e39c7c7755ebff1e9e1e1516d3f5",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0xdffc232ed74a25031a3e16c81013da22ac75806f",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0xc531a6135142b1532433e334e215eb2f32b069c1",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0xb4047ab92ed82c3f29c14010a955da6708a41244",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0x10ca519614b0f3463890387c24819001affc5152",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0x753da4a6f75919d697d604691620fd55fa01d8b0",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0x6d800bc192666936d612156f594357dafa8fc290",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0xb9b2ecaa664fdcc6f7104e0cff5f3a690f0b3a4c",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0x23a5d0145ca6fa87cfb442082516a2c2a3e68935",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0xf4ee75d0d09f14248e942cb94ec909df7c600a85",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0x8784d80f3308ee0a0f0d40c5623b1454533b84e0",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0x159133e88079f7ce5ac4ad302be1d4a75a91aa63",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0xf01e29461f1fcedd82f5258da006295e23b4fab3",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0x724c6d29f23f6bd671b0d9305aab6e7d9d8b8be0",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0x5c21c86735bbc0a8f943a5de4c4dbc454f19859e",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0xeb21c224632d9f59214a160c21e5ba43104fb015",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0x88e3c651b57245e13183d553a7573cbfbd4fddc0",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0x9e41f55db4573f92d0cb59736d781891e94b8f1d",
+        "startBlock": "16170000"
+      },
+      {
+        "address": "0x987c70086239e1a1e9f242ca19fb5a270d4e72b2",
+        "startBlock": "16170000"
+      }
+    ]
   },
   "local": {
     "network": "mainnet",
