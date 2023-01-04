@@ -5,7 +5,7 @@ export type Options = {
   startBlock: number
   endBlock: number
   remap: string
-  outputDir: string
+  dropAddress: string
   verbose: boolean
   subgraph: string
 }

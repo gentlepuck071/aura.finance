@@ -7,7 +7,7 @@ export async function getOptions(pipeline: {}) {
     { name: 'startBlock', type: Number },
     { name: 'endBlock', type: Number },
     { name: 'remap', type: String },
-    { name: 'outputDir', type: String },
+    { name: 'dropAddress', type: String },
     { name: 'verbose', type: Boolean, defaultValue: false },
     {
       name: 'subgraph',
@@ -20,15 +20,16 @@ export async function getOptions(pipeline: {}) {
   if (!maybeOptions.startBlock)
     throw new Error(`Required argument --startBlock`)
   if (!maybeOptions.endBlock) throw new Error(`Required argument --endBlock`)
-  if (!maybeOptions.outputDir) throw new Error(`Required argument --outputDir`)
+  if (!maybeOptions.dropAddress)
+    throw new Error(`Required argument --dropAddress`)
 
   const options = maybeOptions as Options
 
   try {
-    await fs.promises.rm(options.outputDir, { recursive: true })
+    await fs.promises.rm(options.dropAddress, { recursive: true })
   } catch {}
 
-  await fs.promises.mkdir(options.outputDir, { recursive: true })
+  await fs.promises.mkdir(options.dropAddress, { recursive: true })
 
   return { ...pipeline, options }
 }

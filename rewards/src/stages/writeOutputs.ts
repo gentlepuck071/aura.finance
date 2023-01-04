@@ -6,11 +6,13 @@ import { Pipeline } from '../types.js'
 
 export async function writeOutputs(pipeline: Pipeline) {
   const {
-    options: { outputDir },
+    options: { dropAddress },
     rewardsPaid,
     logger,
     merkleDrop,
   } = pipeline
+
+  const outputDir = path.join('ipfs', dropAddress)
 
   logger('Writing outputs...')
 
