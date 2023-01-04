@@ -1,4 +1,8 @@
 import { pipe } from 'froebel'
+import dotenv from 'dotenv'
+
+dotenv.config()
+
 import { getClaims } from './stages/getClaims.js'
 import { getLogger } from './stages/getLogger.js'
 import { getOptions } from './stages/getOptions.js'

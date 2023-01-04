@@ -1,4 +1,5 @@
 import fs from 'fs'
+import path from 'path'
 import commandLineArgs from 'command-line-args'
 import { Options } from '../types.js'
 
@@ -25,11 +26,13 @@ export async function getOptions(pipeline: {}) {
 
   const options = maybeOptions as Options
 
+  const outputDir = path.join('ipfs', options.dropAddress)
+
   try {
-    await fs.promises.rm(options.dropAddress, { recursive: true })
+    await fs.promises.rm(outputDir, { recursive: true })
   } catch {}
 
-  await fs.promises.mkdir(options.dropAddress, { recursive: true })
+  await fs.promises.mkdir(outputDir, { recursive: true })
 
   return { ...pipeline, options }
 }

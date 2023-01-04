@@ -1,3 +1,5 @@
+// One-off remapping of proofs files to a combined json file
+
 import fs from 'fs'
 import path from 'path'
 

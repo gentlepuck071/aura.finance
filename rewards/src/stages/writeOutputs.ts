@@ -1,6 +1,7 @@
 import { BigNumber } from 'ethers'
 import fs from 'fs'
 import path from 'path'
+import PinataSDK from '@pinata/sdk'
 import { formatUnits, solidityKeccak256 } from 'ethers/lib/utils.js'
 import { Pipeline } from '../types.js'
 
@@ -11,6 +12,11 @@ export async function writeOutputs(pipeline: Pipeline) {
     logger,
     merkleDrop,
   } = pipeline
+
+  const pinata = new (PinataSDK as any as typeof PinataSDK['default'])(
+    process.env.PINATA_API_KEY,
+    process.env.PINATA_API_SECRET,
+  )
 
   const outputDir = path.join('ipfs', dropAddress)
 
@@ -127,22 +133,22 @@ export async function writeOutputs(pipeline: Pipeline) {
   {
     logger('Writing proofs...')
 
-    await fs.promises.mkdir(path.join(outputDir, 'proofs'))
-
-    for (const [account, amount] of Object.entries(merkleDrop.claims)) {
-      const leaf = solidityKeccak256(
-        ['address', 'uint256'],
-        [account, amount.toString()],
-      )
-
-      const proof = merkleDrop.merkleTree.getHexProof(leaf)
-
-      await fs.promises.writeFile(
-        path.join(outputDir, 'proofs', `${account}.json`),
-        JSON.stringify(proof),
-        'utf-8',
-      )
-    }
+    // Glob all proofs to reduce the number of IPFS pins required
+    const proofs = Object.fromEntries(
+      Object.entries(merkleDrop.claims).map(([account, amount]) => {
+        const leaf = solidityKeccak256(
+          ['address', 'uint256'],
+          [account, amount.toString()],
+        )
+        const proof = merkleDrop.merkleTree.getHexProof(leaf)
+        return [account, proof]
+      }),
+    )
+    await fs.promises.writeFile(
+      path.join(outputDir, `proofs.json`),
+      JSON.stringify(proofs, null, 0),
+      'utf-8',
+    )
   }
 
   {
@@ -153,6 +159,12 @@ export async function writeOutputs(pipeline: Pipeline) {
       logger.getLogs().join('\n'),
       'utf-8',
     )
+  }
+
+  {
+    logger('Uploading to IPFS...')
+    const resp = await pinata.pinFromFS(outputDir)
+    logger(`Pinned to IPFS: ${resp.IpfsHash}`)
   }
 
   logger('Done')
