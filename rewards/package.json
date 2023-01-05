@@ -7,7 +7,7 @@
     "epoch": "node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm src/index.ts",
     "remap": "node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm src/remap.ts",
     "epoch:1": "pnpm epoch --startBlock 16177665 --endBlock 16239455 --remap remap.json --dropAddress 0x69a07d8a45b71e5224bb220ae8933ae8dce96b74 --verbose",
-    "epoch:2": "pnpm epoch --startBlock 16239455 --endBlock 16340703 --remap remap.json --dropAddress TODO --verbose"
+    "epoch:2": "pnpm epoch --startBlock 16239455 --endBlock 16340703 --remap remap.json --dropAddress 0xdb52CAaF82757adBBA11f448408ddF571f4b32A8 --verbose"
   },
   "keywords": [],
   "author": "0xButterfield",
