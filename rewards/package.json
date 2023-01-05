@@ -5,12 +5,15 @@
   "type": "module",
   "scripts": {
     "epoch": "node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm src/index.ts",
-    "epoch:local": "pnpm epoch --startBlock 16177665 --endBlock 16239455 --remap remap.json --outputDir drop-1 --verbose"
+    "remap": "node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm src/remap.ts",
+    "epoch:1": "pnpm epoch --startBlock 16177665 --endBlock 16239455 --remap remap.json --dropAddress 0x69a07d8a45b71e5224bb220ae8933ae8dce96b74 --verbose",
+    "epoch:2": "pnpm epoch --startBlock 16239455 --endBlock 16340703 --remap remap.json --dropAddress 0x9efe098eda4f04b9b931002df003c9898b626d87 --verbose"
   },
   "keywords": [],
   "author": "0xButterfield",
   "license": "ISC",
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/node": "^18.11.17",
     "prettier": "^2.8.1",
     "ts-node": "^10.9.1",
@@ -22,7 +25,9 @@
     "trailingComma": "all"
   },
   "dependencies": {
+    "@pinata/sdk": "^2.1.0",
     "command-line-args": "^5.2.1",
+    "dotenv": "^16.0.3",
     "ethers": "^5.7.2",
     "froebel": "^0.23.0",
     "graphql": "^16.6.0",

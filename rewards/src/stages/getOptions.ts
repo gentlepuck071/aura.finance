@@ -1,4 +1,5 @@
 import fs from 'fs'
+import path from 'path'
 import commandLineArgs from 'command-line-args'
 import { Options } from '../types.js'
 
@@ -7,8 +8,9 @@ export async function getOptions(pipeline: {}) {
     { name: 'startBlock', type: Number },
     { name: 'endBlock', type: Number },
     { name: 'remap', type: String },
-    { name: 'outputDir', type: String },
+    { name: 'dropAddress', type: String },
     { name: 'verbose', type: Boolean, defaultValue: false },
+    { name: 'uploadToIpfs', type: Boolean, defaultValue: false },
     {
       name: 'subgraph',
       type: String,
@@ -20,15 +22,18 @@ export async function getOptions(pipeline: {}) {
   if (!maybeOptions.startBlock)
     throw new Error(`Required argument --startBlock`)
   if (!maybeOptions.endBlock) throw new Error(`Required argument --endBlock`)
-  if (!maybeOptions.outputDir) throw new Error(`Required argument --outputDir`)
+  if (!maybeOptions.dropAddress)
+    throw new Error(`Required argument --dropAddress`)
 
   const options = maybeOptions as Options
 
+  const outputDir = path.join('ipfs', options.dropAddress)
+
   try {
-    await fs.promises.rm(options.outputDir, { recursive: true })
+    await fs.promises.rm(outputDir, { recursive: true })
   } catch {}
 
-  await fs.promises.mkdir(options.outputDir, { recursive: true })
+  await fs.promises.mkdir(outputDir, { recursive: true })
 
   return { ...pipeline, options }
 }

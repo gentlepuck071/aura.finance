@@ -89,6 +89,32 @@ dataSources:
           handler: handleRewardPaid
       file: ./src/AuraBalRewardPool.ts
 
+  {{#shutdownPools}}
+  - kind: ethereum
+    name: 'BaseRewardPool_{{address}}'
+    network: '{{network}}'
+    source:
+      abi: BaseRewardPool
+      address: '{{address}}'
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Pool
+        - RewardPaid
+      abis:
+        - name: BoosterV1
+          file: ./abis/BoosterV1.json
+        - name: BaseRewardPool
+          file: ./abis/BaseRewardPool.json
+      eventHandlers:
+        - event: RewardPaid(indexed address,uint256)
+          handler: handleRewardPaid
+      file: ./src/BaseRewardPool.ts
+  {{/shutdownPools}}
+
 templates:
   - kind: ethereum
     name: BaseRewardPool
