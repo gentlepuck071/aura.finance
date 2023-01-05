@@ -10,6 +10,7 @@ export async function getOptions(pipeline: {}) {
     { name: 'remap', type: String },
     { name: 'dropAddress', type: String },
     { name: 'verbose', type: Boolean, defaultValue: false },
+    { name: 'uploadToIpfs', type: Boolean, defaultValue: false },
     {
       name: 'subgraph',
       type: String,

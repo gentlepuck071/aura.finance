@@ -56,6 +56,9 @@ pnpm epoch --startBlock 16177665 --endBlock 16239455 --remap remap.json --output
 - `verbose`
   - Boolean
   - Optional verbose logging
+- `uploadToIpfs`
+  - Boolean
+  - Optionally upload the `ipfs` dir to IPFS
 
 ### Outputs
 
@@ -67,7 +70,7 @@ The script produces the following outputs:
   - A mapping of accounts to claimable AURA rewards, as exact decimal strings
 - `rewards.json`
   - A mapping of accounts to BAL rewards considered, as exact decimal strings
-- `proofs/{account}.json`
-  - For each account, a JSON file with the Merkle proof
+- `proofs.json`
+  - For all accounts, a JSON file with all Merkle proofs
 - `log.txt`
   - Log of arguments used, etc.

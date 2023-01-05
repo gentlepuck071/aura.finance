@@ -31,10 +31,15 @@ export async function getClaims(pipeline: Pipeline) {
     ]),
   )
 
-  const STARGATE = '0x65bb797c2B9830d891D87288F029ed8dACc19705'
-  claims[STARGATE] = (claims[STARGATE] ?? BigNumber.from(0)).add(
-    parseUnits('6000'),
+  // TODO IMPORTANT: remove after Epoch 2
+  const OLD_POOLS_CLAIM_USER = '0xAE0BAF66E8f5Bb87A6fd54066e469cDfE93212Ec'
+  const OLD_POOLS_CLAIM_AMOUNT = '16025.803419402348646235'
+  logger(
+    `Adding user's missing claims from epoch 1: ${OLD_POOLS_CLAIM_USER} (amount: ${OLD_POOLS_CLAIM_AMOUNT})`,
   )
+  claims[OLD_POOLS_CLAIM_USER] = (
+    claims[OLD_POOLS_CLAIM_USER] ?? BigNumber.from(0)
+  ).add(parseUnits(OLD_POOLS_CLAIM_AMOUNT))
 
   logger()
 

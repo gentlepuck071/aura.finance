@@ -7,7 +7,7 @@ import { Pipeline } from '../types.js'
 
 export async function writeOutputs(pipeline: Pipeline) {
   const {
-    options: { dropAddress },
+    options: { dropAddress, uploadToIpfs },
     rewardsPaid,
     logger,
     merkleDrop,
@@ -162,9 +162,13 @@ export async function writeOutputs(pipeline: Pipeline) {
   }
 
   {
-    logger('Uploading to IPFS...')
-    const resp = await pinata.pinFromFS(outputDir)
-    logger(`Pinned to IPFS: ${resp.IpfsHash}`)
+    if (uploadToIpfs) {
+      logger('Uploading to IPFS...')
+      const resp = await pinata.pinFromFS(outputDir)
+      logger(`Pinned to IPFS: ${resp.IpfsHash}`)
+    } else {
+      logger('Skipping IPFS upload...')
+    }
   }
 
   logger('Done')
