@@ -8,7 +8,8 @@
     "remap": "node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm src/remap.ts",
     "epoch:1": "pnpm epoch --startBlock 16177665 --endBlock 16239455 --remap remap.json --dropAddress 0x69a07d8a45b71e5224bb220ae8933ae8dce96b74 --verbose",
     "epoch:2": "pnpm epoch --startBlock 16239455 --endBlock 16340703 --remap remap.json --dropAddress 0x9efe098eda4f04b9b931002df003c9898b626d87 --verbose",
-    "epoch:3": "pnpm epoch --startBlock 16340703 --endBlock 16418579 --remap remap.json --dropAddress TODO --verbose"
+    "epoch:3": "pnpm epoch --startBlock 16340703 --endBlock 16418579 --remap remap.json --dropAddress 0xc90c26578E5A4bE1ea711472527959fc48731A98 --verbose",
+    "epoch:4": "pnpm epoch --startBlock 16418579 --endBlock 16563848 --remap remap.json --dropAddress TODO --verbose"
   },
   "keywords": [],
   "author": "0xButterfield",
